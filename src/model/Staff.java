@@ -1,4 +1,52 @@
 package model;
 
-public class Staff {
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+public class Staff
+{
+    private String id;
+    private String role;
+    private Set<String> availableShifts;
+
+    public Staff(String id, String role, Set<String> availableShifts)
+    {
+        this.id = id;
+        this.role = role;
+        this.availableShifts = new HashSet<>(Objects.requireNonNull(availableShifts));
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public String getRole()
+    {
+        return role;
+    }
+
+    public Set<String> getAvailableShifts()
+    {
+        return availableShifts;
+    }
+
+    public boolean isAvailable(Shift shift)
+    {
+        // temp placeholder
+        return getAvailableShifts().contains(shift.toString());
+    }
+
+    public boolean matchesRole(Shift shift)
+    {
+        // temp placeholder
+        return getRole().equals(shift.toString());
+    }
+
+    public boolean canWork(Shift shift)
+    {
+        // temp placeholder
+        return getAvailableShifts().contains(shift.toString());
+    }
 }
