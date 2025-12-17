@@ -10,10 +10,17 @@ import java.util.stream.Collectors;
 
 public class ScheduleValidation {
 
+    public void validate(List<Staff> staff, List<Shift> shifts) throws InvalidScheduleException
+    {
+        validateBasic(staff, shifts);
+        validateAvailabilityInParallel(staff, shifts);
+    }
+
     //validate that the data is usable and valid
-    private void validateBasic(List<Staff> staff, List<Shift> shifts) throws StaffShortageException, InvalidScheduleException {
+    private void validateBasic(List<Staff> staff, List<Shift> shifts) throws InvalidScheduleException {
         if (staff == null || staff.isEmpty()) {
-            throw new StaffShortageException("Staff is null or empty");
+            //throw new StaffShortageException("Staff is null or empty");
+            throw new InvalidScheduleException("Staff list is null or empty");
         }
 
         if (shifts == null || shifts.isEmpty()) {
