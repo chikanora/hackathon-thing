@@ -35,18 +35,18 @@ public class Staff
     public boolean isAvailable(Shift shift)
     {
         // temp placeholder
-        return getAvailableShifts().contains(shift.toString());
+        return availableShifts.contains(shift.getName());
     }
 
     public boolean matchesRole(Shift shift)
     {
         // temp placeholder
-        return getRole().equals(shift.toString());
+        return getRole().equals(shift.getRequiredRole());
     }
 
     public boolean canWork(Shift shift)
     {
         // temp placeholder
-        return getAvailableShifts().contains(shift.toString());
+        return matchesRole(shift) && isAvailable(shift);
     }
 }
