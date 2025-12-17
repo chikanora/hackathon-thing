@@ -37,16 +37,21 @@ public class ScheduleValidation {
             validShiftNames.add(shift.getName());
         }
 
+        // verify that staff roles are present in validShiftNames
         staff.parallelStream().forEach(s -> {
             for (String avail: s.getAvailableShifts()) {
                 if (!validShiftNames.contains(avail)) {
-                    errors.add("Staff" + s.getId() + " has unknown available shift: " + avail);
+                    errors.add("Staff" + s.getId() + " has unknown role: " + avail);
                 }
             }
         });
 
         if (!errors.isEmpty()) {
-            throw new InvalidScheduleException("Schedule had " + errors.size() + " errors");
+            StringBuilder error_str = new StringBuilder();
+            for (String error : errors) {
+                error_str.append(error + "\n");
+            }
+            throw new InvalidScheduleException("Schedule had " + errors.size() + " errors\n" + error_str.toString());
         }
     }
 }
